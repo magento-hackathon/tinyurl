@@ -44,7 +44,7 @@ class Hackathon_TinyUrl_Controller_Router extends Mage_Core_Controller_Varien_Ro
             'identifier' => $identifier,
             'continue'   => true
         ));
-        Mage::dispatchEvent('cms_controller_router_match_before', array(
+        Mage::dispatchEvent('tinyurl_controller_router_match_before', array(
             'router'    => $this,
             'condition' => $condition
         ));
