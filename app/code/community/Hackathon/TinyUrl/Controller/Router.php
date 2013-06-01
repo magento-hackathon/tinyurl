@@ -31,7 +31,6 @@ class Hackathon_TinyUrl_Controller_Router extends Mage_Core_Controller_Varien_Ro
      */
     public function match(Zend_Controller_Request_Http $request)
     {
-        echo Mage::helper('tinyurl')->getTinyUrl(2);
         if (!Mage::isInstalled()) {
             Mage::app()->getFrontController()->getResponse()
                 ->setRedirect(Mage::getUrl('install'))
