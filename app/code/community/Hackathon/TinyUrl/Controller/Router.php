@@ -65,7 +65,7 @@ class Hackathon_TinyUrl_Controller_Router extends Mage_Core_Controller_Varien_Ro
         }
 
         $iarray = explode('/', $identifier);
-        if(count($iarray) > 1) { Mage::log($identifier, null, 'identifier.log');
+        if(count($iarray) > 1) {
             if(Mage::getStoreConfig(self::XML_PATH_TINY_URL_PRODUCT_PREFIX) &&
                 $iarray[0] == Mage::getStoreConfig(self::XML_PATH_TINY_URL_PRODUCT_PREFIX) &&
                 $iarray[1] == (int) $iarray[1]) {
