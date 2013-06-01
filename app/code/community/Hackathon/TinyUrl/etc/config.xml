@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Hackathon_TinyUrl>
+            <version>0.1.0</version>
+        </Hackathon_TinyUrl>
+    </modules>
+    <global>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <tinyurl>
+                        <class>Hackathon_TinyUrl_Controller_Router</class>
+                        <method>initControllerRouters</method>
+                    </tinyurl>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+    <default>
+        <catalog>
+            <tinyurl>
+                <router>t</router>
+            </tinyurl>
+        </catalog>
+    </default>
+</config>
