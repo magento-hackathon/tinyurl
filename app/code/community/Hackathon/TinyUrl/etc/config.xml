@@ -6,6 +6,11 @@
         </Hackathon_TinyUrl>
     </modules>
     <global>
+        <helpers>
+            <tinyurl>
+                <class>Hackathon_TinyUrl_Helper</class>
+            </tinyurl>
+        </helpers>
         <events>
             <controller_front_init_routers>
                 <observers>
