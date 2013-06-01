@@ -63,7 +63,8 @@ class Hackathon_TinyUrl_Controller_Router extends Mage_Core_Controller_Varien_Ro
         }
 
         $iarray = explode('/', $identifier);
-        if(count($iarray) > 1 && $iarray[0] == Mage::getStoreConfig(self::XML_PATH_TINY_URL_ROUTER) &&
+        if(Mage::getStoreConfig(self::XML_PATH_TINY_URL_ROUTER) &&
+            count($iarray) > 1 && $iarray[0] == Mage::getStoreConfig(self::XML_PATH_TINY_URL_ROUTER) &&
             $iarray[1] == (int) $iarray[1]) {
             $request->setModuleName('catalog')
                 ->setControllerName('product')
