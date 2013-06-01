@@ -25,7 +25,9 @@
     <default>
         <catalog>
             <tinyurl>
-                <router>t</router>
+                <product_prefix>p</product_prefix>
+                <category_prefix>c</category_prefix>
+                <cms_page_prefix>m</cms_page_prefix>
             </tinyurl>
         </catalog>
     </default>

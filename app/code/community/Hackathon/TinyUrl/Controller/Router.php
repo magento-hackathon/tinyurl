@@ -8,7 +8,9 @@
  */
 class Hackathon_TinyUrl_Controller_Router extends Mage_Core_Controller_Varien_Router_Abstract
 {
-    const XML_PATH_TINY_URL_ROUTER = 'catalog/tinyurl/router';
+    const XML_PATH_TINY_URL_PRODUCT_PREFIX = 'catalog/tinyurl/product_prefix';
+    const XML_PATH_TINY_URL_CATEGORY_PREFIX = 'catalog/tinyurl/category_prefix';
+    const XML_PATH_TINY_URL_CMS_PAGE_PREFIX = 'catalog/tinyurl/cms_page_prefix';
 
     /**
      * Initialize Controller Router
@@ -63,19 +65,44 @@ class Hackathon_TinyUrl_Controller_Router extends Mage_Core_Controller_Varien_Ro
         }
 
         $iarray = explode('/', $identifier);
-        if(Mage::getStoreConfig(self::XML_PATH_TINY_URL_ROUTER) &&
-            count($iarray) > 1 && $iarray[0] == Mage::getStoreConfig(self::XML_PATH_TINY_URL_ROUTER) &&
-            $iarray[1] == (int) $iarray[1]) {
-            $request->setModuleName('catalog')
-                ->setControllerName('product')
-                ->setActionName('view')
-                ->setParam('id', (int) $iarray[1]);
-            $request->setAlias(
-                Mage_Core_Model_Url_Rewrite::REWRITE_REQUEST_PATH_ALIAS,
-                $identifier
-            );
-
-            return true;
+        if(count($iarray) > 1) { Mage::log($identifier, null, 'identifier.log');
+            if(Mage::getStoreConfig(self::XML_PATH_TINY_URL_PRODUCT_PREFIX) &&
+                $iarray[0] == Mage::getStoreConfig(self::XML_PATH_TINY_URL_PRODUCT_PREFIX) &&
+                $iarray[1] == (int) $iarray[1]) {
+                $urlRewrite = Mage::getModel('core/url_rewrite')->getCollection()
+                    ->addFieldToFilter('id_path', 'product/'.(int) $iarray[1])
+                    ->addFieldToFilter('store_id', Mage::app()->getStore()->getId());
+                if($urlRewrite->count()) {
+                    $item = $urlRewrite->getFirstItem();
+                    Mage::app()->getResponse()
+                        ->setRedirect(Mage::getBaseUrl() . $item->getRequestPath());
+                    Mage::app()->getResponse()->sendResponse();
+                    exit;
+                }
+            } else if(Mage::getStoreConfig(self::XML_PATH_TINY_URL_CATEGORY_PREFIX) &&
+                $iarray[0] == Mage::getStoreConfig(self::XML_PATH_TINY_URL_CATEGORY_PREFIX) &&
+                $iarray[1] == (int) $iarray[1]) {
+                $urlRewrite = Mage::getModel('core/url_rewrite')->getCollection()
+                    ->addFieldToFilter('id_path', 'category/'.(int) $iarray[1])
+                    ->addFieldToFilter('store_id', Mage::app()->getStore()->getId());
+                if($urlRewrite->count()) {
+                    $item = $urlRewrite->getFirstItem();
+                    Mage::app()->getResponse()
+                        ->setRedirect(Mage::getBaseUrl() . $item->getRequestPath());
+                    Mage::app()->getResponse()->sendResponse();
+                    exit;
+                }
+            } else if(Mage::getStoreConfig(self::XML_PATH_TINY_URL_CMS_PAGE_PREFIX) &&
+                $iarray[0] == Mage::getStoreConfig(self::XML_PATH_TINY_URL_CMS_PAGE_PREFIX) &&
+                $iarray[1] == (int) $iarray[1]) {
+                $cmsPage = Mage::getModel('cms/page')->load((int) $iarray[1]);
+                if($cmsPage->getId()) {
+                    Mage::app()->getResponse()
+                        ->setRedirect(Mage::getBaseUrl() . $cmsPage->getIdentifier());
+                    Mage::app()->getResponse()->sendResponse();
+                    exit;
+                }
+            }
         }
         return false;
     }

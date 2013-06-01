@@ -11,15 +11,33 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <router translate="label">
-                            <label>Tiny URL Prefix</label>
+                        <product_prefix translate="label">
+                            <label>Tiny Product URL Prefix</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>1</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment>Prefix for Tinyurls</comment>
-                        </router>
+                            <comment>Prefix for Product Tinyurls</comment>
+                        </product_prefix>
+                        <category_prefix translate="label">
+                            <label>Tiny Category URL Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Prefix for Category Tinyurls</comment>
+                        </category_prefix>
+                        <cms_page_prefix translate="label">
+                            <label>Tiny Cms Page URL Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Prefix for CMS Page Tinyurls</comment>
+                        </cms_page_prefix>
                     </fields>
                 </tinyurl>
             </groups>
